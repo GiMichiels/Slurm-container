@@ -160,7 +160,7 @@ VOLUME ["/var/lib/mysql", "/var/lib/slurmd", "/var/spool/slurmd", "/var/log/slur
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 22
+EXPOSE 22 80
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
