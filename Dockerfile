@@ -16,7 +16,7 @@
 
 # sudo docker run -p 10022:22 -it -h cytomine-slurm slurm-container
 
-FROM centos:7
+FROM centos:7.4.1708
 
 ARG SLURM_VERSION=17.11.5
 ARG SLURM_DOWNLOAD_MD5=21fbe051aee43689dcd7711e47064f89
