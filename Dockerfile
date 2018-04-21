@@ -77,7 +77,7 @@ RUN yum makecache fast \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-RUN yum install -y openssh-server openssh-clients passwd
+RUN yum install -y openssh-server openssh-clients passwd net-tools
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN sed -ri 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config && echo 'root:changeme' | chpasswd
 
