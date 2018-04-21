@@ -81,29 +81,7 @@ RUN yum install -y openssh-server openssh-clients passwd
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN sed -ri 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config && echo 'root:changeme' | chpasswd
 
-RUN set -x \
-    && wget https://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz \
-    && tar xzf Python-2.6.9.tgz \
-    && cd Python-2.6.9 \
-    && export CFLAGS="-D_GNU_SOURCE -fPIC -fwrapv" \
-    && export CXXFLAGS="-D_GNU_SOURCE -fPIC -fwrapv" \
-    && export OPT="-D_GNU_SOURCE -fPIC -fwrapv" \
-    && export LINKCC="gcc" \
-    && export CC="gcc" \
-    && ./configure --enable-ipv6 --enable-unicode=ucs4 --enable-shared --with-system-ffi \
-    && make install \
-    && unset CFLAGS CXXFLAGS OPT LINKCC CC \
-    && cd .. \
-    && rm -rf Python-2.6.9 \
-    && echo "/usr/local/lib" >> /etc/ld.so.conf.d/python-2.6.conf \
-    && chmod 0644 /etc/ld.so.conf.d/python-2.6.conf \
-    && /sbin/ldconfig \
-    && wget https://bootstrap.pypa.io/get-pip.py \
-    && /usr/local/bin/python2.6 get-pip.py \
-    && rm -f get-pip.py
-
-RUN pip2.6 install Cython nose \
-    && pip2.7 install Cython nose \
+RUN pip2.7 install Cython nose \
     && pip3.4 install Cython nose \
     && pip3.5 install Cython nose \
     && pip3.6 install Cython nose
